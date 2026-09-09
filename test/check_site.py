@@ -121,6 +121,12 @@ def test_content(html, text, bundle):
     check("[content] enlace a imeiclick.com en footer",
           re.search(r'<footer[\s\S]*?imeiclick\.com', html) is not None)
     check("[content] favicon referenciado", "favicon.ico" in html)
+    # cross-promo: bloque con los colores de imeiclick.com y CTA a /free
+    # (el href imeiclick.com/free va antes del texto del CTA en la misma linea)
+    check("[content] cross-promo imeiclick",
+          re.search(r'<section[\s\S]*?imei-promo[\s\S]*?imeiclick\.com/free"[\s\S]*?Verificar gratis ahora', html) is not None)
+    check("[content] cross-promo no rompe CTA principal",
+          text.count('Más información por WhatsApp') >= 1)
 
 
 # --- F1.2 reglas de diseno (design-taste-frontend) -------------------------

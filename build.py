@@ -22,6 +22,8 @@ with open(os.path.join(SITE, "content", "copy.json"), encoding="utf-8") as fh:
 WA = "https://wa.me/5491166658740?text=" \
      "Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20PICO%202%20Ultra"
 TIKTOK = "https://www.tiktok.com/@imeiclick"
+IMEICLICK = "https://imeiclick.com/"
+SVC_COUNT = "210"
 
 IPHONES = ["iPhone XR", "iPhone XS", "iPhone XS Max", "iPhone 11",
            "iPhone 11 Pro", "iPhone 11 Pro Max", "iPhone SE 2"]
@@ -254,6 +256,32 @@ DOC = f"""<!doctype html>
 				<div class="cta-row">
 					<a class="cta" href="{WA}" target="_blank" rel="noopener">{e(C['close']['cta'])}</a>
 					<a class="cta cta-ghost" href="{TIKTOK}" target="_blank" rel="noopener">Ver @imeiclick en TikTok</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- 9. Cross-promo imeiclick: los colores de la pagina principal
+		     de imeiclick.com (cyan->emerald), enlace a la verificacion gratis.
+		     Sutil: mismo fondo oscuro de pico2ultra, solo el bloque destaca. -->
+		<section class="pad-y">
+			<div class="wrap">
+				<div class="imei-promo" data-reveal>
+					<div class="imei-promo-grid">
+						<div>
+							<span class="imei-promo-badge">
+								<svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+								Del mismo equipo de imeiclick
+							</span>
+							<h2 class="h2">Verifica cualquier IMEI,<br><span class="imei-promo-grad">sin pagar nada</span></h2>
+							<p class="body">¿Compraste el equipo o lo vas a comprar? Consulta su estado real antes de cerrar trato.</p>
+							<a class="cta imei-promo-cta" href="https://imeiclick.com/free" target="_blank" rel="noopener">Verificar gratis ahora</a>
+						</div>
+						<ul class="imei-promo-list">
+							<li>Modelo y marca al instante, sin coste</li>
+							<li>Sin registro ni tarjeta, solo el IMEI</li>
+							<li>Más de {SVC_COUNT}+ servicios premium al crear cuenta</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</section>
