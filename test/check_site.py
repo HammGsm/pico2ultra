@@ -120,6 +120,8 @@ def test_content(html, text, bundle):
           re.search(r'<header[\s\S]*?imeiclick\.com', html) is not None)
     check("[content] enlace a imeiclick.com en footer",
           re.search(r'<footer[\s\S]*?imeiclick\.com', html) is not None)
+    check("[content] nav-imei es pill con punto",
+          re.search(r'nav-imei[\s\S]*?nav-imei-dot[\s\S]*?imeiclick\.com', html) is not None)
     check("[content] favicon referenciado", "favicon.ico" in html)
     # cross-promo: bloque con los colores de imeiclick.com y CTA a /free
     # (el href imeiclick.com/free va antes del texto del CTA en la misma linea)

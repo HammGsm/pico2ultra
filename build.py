@@ -132,7 +132,13 @@ DOC = f"""<!doctype html>
 		<div class="wrap nav-inner">
 			<a class="nav-brand" href="#main">PICO 2 <span>Ultra</span></a>
 			<div class="nav-right">
-				<a class="nav-imei" href="https://imeiclick.com/" target="_blank" rel="noopener">imeiclick.com</a>
+				<a class="nav-imei" href="https://imeiclick.com/" target="_blank" rel="noopener">
+					<span class="nav-imei-dot" aria-hidden="true">
+						<span class="nav-imei-dot-ping"></span>
+						<span class="nav-imei-dot-core"></span>
+					</span>
+					imeiclick.com
+				</a>
 				<a class="cta" href="{WA}" target="_blank" rel="noopener">{e(C['hero']['cta'])}</a>
 			</div>
 		</div>
