@@ -1,0 +1,709 @@
+/* ==========================================================================
+   base.css — tokens y estructura. PICO 2 Ultra landing.
+   Paleta MEDIDA de las fotos reales del producto (gris-azulado frio + negro).
+   Un tema, un acento, un radio. Ver PLAN.md §1.
+   ========================================================================== */
+
+/* Geist self-hosted (variable: un fichero cubre 100-900).
+   Sin esto la pagina caia a system-ui y perdia el look de product page. */
+@font-face {
+	font-family: "Geist";
+	src: url("fonts/Geist-Variable.woff2") format("woff2-variations");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Geist Mono";
+	src: url("fonts/GeistMono-Variable.woff2") format("woff2-variations");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	/* color: fondo off-black frio, nunca negro puro */
+	--bg: #08090c;
+	--surface: #111318;
+	--surface-2: #171a21;
+	--text: #f2f4f8;
+	--text-dim: #9aa3b2;
+	--accent: #4fd6e8; /* cian frio, derivado del #a8c0c0 de las fotos */
+	--accent-ink: #05222a; /* texto sobre el acento, contraste AA */
+	--hairline: rgba(242, 244, 248, 0.1);
+
+	/* forma: un solo sistema de radio */
+	--radius: 16px;
+	--radius-sm: 10px;
+	--pill: 999px;
+
+	/* tipo */
+	--font: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+	/* ritmo */
+	--gap: 1.25rem;
+	--section-y: clamp(5rem, 12vh, 9rem);
+	--max: 1200px;
+
+	/* easing Apple */
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font);
+	font-size: 100%;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+/* Las imagenes llevan width/height para reservar espacio (evita CLS),
+   pero esos atributos no deben imponer el alto renderizado. */
+picture img {
+	height: auto;
+}
+
+a {
+	color: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: var(--radius-sm);
+}
+
+/* --- tipografia -------------------------------------------------------- */
+
+.display {
+	font-size: clamp(2.25rem, 6.2vw, 4.25rem);
+	line-height: 1.05;
+	letter-spacing: -0.025em;
+	font-weight: 650;
+	margin: 0;
+	text-wrap: balance;
+}
+
+.h2 {
+	font-size: clamp(1.75rem, 4.2vw, 3rem);
+	line-height: 1.08;
+	letter-spacing: -0.02em;
+	font-weight: 640;
+	margin: 0;
+	text-wrap: balance;
+}
+
+.h3 {
+	font-size: clamp(1.125rem, 2vw, 1.375rem);
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+	font-weight: 600;
+	margin: 0;
+}
+
+.body {
+	font-size: clamp(1rem, 1.2vw, 1.0625rem);
+	color: var(--text-dim);
+	max-width: 62ch;
+	margin: 0;
+}
+
+.body-tight {
+	font-size: 0.9375rem;
+	color: var(--text-dim);
+	margin: 0;
+	line-height: 1.45;
+}
+
+/* eyebrow: racionado a 3 en toda la pagina (design-taste §9.F) */
+.eyebrow {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--accent);
+	margin: 0 0 0.75rem;
+	font-weight: 500;
+}
+
+/* --- layout ------------------------------------------------------------ */
+
+.wrap {
+	width: 100%;
+	max-width: var(--max);
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+section {
+	position: relative;
+}
+
+.pad-y {
+	padding-block: var(--section-y);
+}
+
+.hairline-top {
+	border-top: 1px solid var(--hairline);
+}
+
+/* --- CTA: un solo intent en toda la pagina ----------------------------- */
+
+.cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.875rem 1.5rem;
+	border-radius: var(--pill);
+	background: var(--accent);
+	color: var(--accent-ink);
+	font-weight: 620;
+	font-size: 0.9375rem;
+	text-decoration: none;
+	white-space: nowrap; /* nunca envolver a 2 lineas */
+	border: 0;
+	cursor: pointer;
+	transition: transform 0.18s var(--ease), filter 0.18s var(--ease);
+}
+
+.cta:hover {
+	filter: brightness(1.08);
+}
+
+.cta:active {
+	transform: scale(0.98);
+}
+
+.cta-ghost {
+	background: transparent;
+	color: var(--text);
+	border: 1px solid var(--hairline);
+}
+
+.cta-ghost:hover {
+	background: var(--surface-2);
+	filter: none;
+}
+
+.cta-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.875rem;
+}
+
+.cta-note {
+	font-size: 0.8125rem;
+	color: var(--text-dim);
+}
+
+/* --- nav: una sola linea, <=80px -------------------------------------- */
+
+.nav {
+	position: sticky;
+	top: 0;
+	z-index: 40;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	background: rgba(8, 9, 12, 0.72);
+	backdrop-filter: blur(18px) saturate(160%);
+	-webkit-backdrop-filter: blur(18px) saturate(160%);
+	border-bottom: 1px solid var(--hairline);
+}
+
+.nav-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+/* enlace sutil a imeiclick.com: mismo estilo que el resto del nav,
+   sin competir con el CTA */
+.nav-imei {
+	font-size: 0.8125rem;
+	color: var(--text-dim);
+	text-decoration: none;
+	transition: color 0.18s var(--ease);
+	white-space: nowrap;
+}
+
+.nav-imei:hover {
+	color: var(--text);
+}
+
+/* movil muy chico: el enlace a imeiclick se oculta, queda el CTA */
+@media (max-width: 420px) {
+	.nav-imei {
+		display: none;
+	}
+}
+
+.nav-brand {
+	font-weight: 640;
+	letter-spacing: -0.015em;
+	text-decoration: none;
+	font-size: 0.9375rem;
+}
+
+.nav-brand span {
+	color: var(--accent);
+}
+
+.nav .cta {
+	padding: 0.5rem 1rem;
+	font-size: 0.8125rem;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+	.nav {
+		background: var(--bg);
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+	}
+}
+
+/* --- hero -------------------------------------------------------------- */
+
+.hero {
+	position: relative;
+	min-height: min(92dvh, 900px);
+	display: grid;
+	align-content: center;
+	padding-block: clamp(3rem, 8vh, 6rem) clamp(2rem, 6vh, 4rem);
+	overflow: hidden;
+}
+
+.hero-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(2rem, 5vw, 3.5rem);
+	align-items: center;
+}
+
+@media (min-width: 900px) {
+	.hero-grid {
+		grid-template-columns: 1.05fr 0.95fr;
+	}
+}
+
+.hero-copy {
+	max-width: 34rem;
+}
+
+.hero-copy .body {
+	margin-top: 1.125rem;
+}
+
+.hero-copy .cta-row {
+	margin-top: 2rem;
+}
+
+.hero-media {
+	position: relative;
+	justify-self: center;
+}
+
+.hero-img {
+	/* PNG sin fondo: nada de border-radius (recortaria el producto).
+	   La sombra proyectada le da apoyo para que no flote plano. */
+	width: min(100%, 520px);
+	height: auto;
+	filter: drop-shadow(0 26px 44px rgba(0, 0, 0, 0.62))
+		drop-shadow(0 4px 12px rgba(79, 214, 232, 0.14));
+	will-change: transform;
+}
+
+/* halo frio detras del producto, sin glow neon */
+.hero-media::before {
+	content: "";
+	position: absolute;
+	inset: 8% 4% 12%;
+	z-index: -1;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(79, 214, 232, 0.16), transparent 68%);
+	filter: blur(46px);
+	pointer-events: none;
+}
+
+/* movil: el hero debe caber en pantalla, CTA visible sin scroll */
+@media (max-width: 899px) {
+	.hero {
+		min-height: 0;
+		padding-block: 1.5rem 2rem;
+	}
+
+	/* producto primero (product page Apple), luego el copy */
+	.hero-grid {
+		gap: 1.25rem;
+	}
+
+	.hero-media {
+		order: -1;
+	}
+
+	.hero-img {
+		width: min(100%, 420px);
+		max-height: none;
+	}
+
+	.hero-copy .body {
+		margin-top: 0.875rem;
+	}
+
+	.hero-copy .cta-row {
+		margin-top: 1.5rem;
+	}
+}
+
+/* --- oneclick: split asimetrico --------------------------------------- */
+
+.oneclick-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(2rem, 4vw, 3rem);
+}
+
+@media (min-width: 860px) {
+	.oneclick-grid {
+		grid-template-columns: 0.9fr 1.1fr;
+		align-items: start;
+	}
+}
+
+.mode-pair {
+	display: grid;
+	gap: 1rem;
+}
+
+.mode {
+	display: grid;
+	gap: 0.5rem;
+	padding: 1.5rem;
+	background: var(--surface);
+	border: 1px solid var(--hairline);
+	border-radius: var(--radius);
+}
+
+.mode-label {
+	font-family: var(--font-mono);
+	font-size: 1.5rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	color: var(--accent);
+}
+
+.click-stat {
+	display: flex;
+	align-items: baseline;
+	gap: 0.625rem;
+	margin-bottom: 1.25rem;
+}
+
+.click-num {
+	font-family: var(--font-mono);
+	font-size: clamp(3.5rem, 11vw, 6.5rem);
+	line-height: 0.9;
+	font-weight: 620;
+	letter-spacing: -0.04em;
+}
+
+.click-word {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	color: var(--text-dim);
+}
+
+/* --- chip: full bleed, dato grande ------------------------------------ */
+
+.chip {
+	background: var(--surface);
+	border-block: 1px solid var(--hairline);
+	text-align: center;
+}
+
+.chip .body {
+	margin-inline: auto;
+	margin-top: 1.125rem;
+}
+
+.chip-stat {
+	font-family: var(--font-mono);
+	font-size: clamp(4rem, 16vw, 10rem);
+	line-height: 0.86;
+	font-weight: 650;
+	letter-spacing: -0.05em;
+	margin: 0.5rem 0 0.25rem;
+	background: linear-gradient(180deg, var(--text) 30%, rgba(79, 214, 232, 0.55));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.chip-stat-label {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--text-dim);
+}
+
+/* --- bento: exactamente 4 celdas para 4 items ------------------------- */
+
+.bento {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--gap);
+	margin-top: 2.5rem;
+}
+
+@media (min-width: 720px) {
+	.bento {
+		grid-template-columns: 1fr 1fr;
+	}
+	/* ritmo: la primera celda pesa mas, no 4 cuadrados iguales */
+	.bento > :nth-child(1) {
+		grid-column: span 2;
+	}
+}
+
+@media (min-width: 1040px) {
+	.bento {
+		grid-template-columns: 1.4fr 1fr 1fr;
+		grid-template-rows: auto auto;
+	}
+	.bento > :nth-child(1) {
+		grid-column: 1;
+		grid-row: 1 / span 2;
+	}
+	.bento > :nth-child(2) {
+		grid-column: 2 / span 2;
+		grid-row: 1;
+	}
+	.bento > :nth-child(3) {
+		grid-column: 2;
+		grid-row: 2;
+	}
+	.bento > :nth-child(4) {
+		grid-column: 3;
+		grid-row: 2;
+	}
+}
+
+.cell {
+	display: grid;
+	align-content: start;
+	gap: 0.5rem;
+	padding: clamp(1.25rem, 2.5vw, 1.875rem);
+	background: var(--surface);
+	border: 1px solid var(--hairline);
+	border-radius: var(--radius);
+}
+
+/* variacion visual real: la celda ancla lleva imagen (design-taste §4.7) */
+.cell-media {
+	position: relative;
+	overflow: hidden;
+	min-height: 300px;
+	align-content: end;
+	background: var(--surface-2);
+}
+
+.cell-media picture {
+	position: absolute;
+	inset: 0;
+}
+
+.cell-media img,
+.cell-media picture img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%; /* gana a picture img{height:auto} */
+	/* PNG sin fondo: contain, no cover, para no cortar el producto */
+	object-fit: contain;
+	object-position: center 38%;
+	padding: 1.5rem 1.5rem 40%;
+	opacity: 0.85;
+	z-index: 0;
+}
+
+.cell-media > * {
+	position: relative;
+	z-index: 1;
+}
+
+.cell-media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background: linear-gradient(180deg, rgba(8, 9, 12, 0.15) 30%, rgba(8, 9, 12, 0.94));
+}
+
+.cell-tint {
+	background: linear-gradient(150deg, rgba(79, 214, 232, 0.1), var(--surface) 62%);
+}
+
+/* --- compatibilidad --------------------------------------------------- */
+
+.compat-cols {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(2rem, 4vw, 3rem);
+	margin-top: 2.5rem;
+}
+
+@media (min-width: 760px) {
+	.compat-cols {
+		grid-template-columns: 1.4fr 1fr;
+	}
+}
+
+.compat-group h3 {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--text-dim);
+	margin: 0 0 1rem;
+	font-weight: 500;
+}
+
+.chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.625rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.chips li {
+	padding: 0.5rem 0.9375rem;
+	border: 1px solid var(--hairline);
+	border-radius: var(--pill);
+	background: var(--surface);
+	font-size: 0.875rem;
+	white-space: nowrap;
+}
+
+.compat-note {
+	margin-top: 2rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--hairline);
+	font-size: 0.875rem;
+	color: var(--text-dim);
+	max-width: 52ch;
+}
+
+/* --- cierre: la unica seccion centrada -------------------------------- */
+
+.close {
+	text-align: center;
+}
+
+.close .body {
+	margin: 1.25rem auto 0;
+}
+
+.close .cta-row {
+	margin-top: 2.25rem;
+	justify-content: center;
+}
+
+/* --- footer ------------------------------------------------------------ */
+
+.foot {
+	padding-block: 2.5rem;
+	border-top: 1px solid var(--hairline);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.8125rem;
+	color: var(--text-dim);
+}
+
+.foot a {
+	color: var(--text-dim);
+	text-decoration: none;
+}
+
+.foot a:hover {
+	color: var(--text);
+}
+
+.foot-links {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+}
+
+/* --- utilidades ------------------------------------------------------- */
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.skip {
+	position: absolute;
+	left: 1rem;
+	top: -3rem;
+	z-index: 60;
+	padding: 0.625rem 1rem;
+	background: var(--accent);
+	color: var(--accent-ink);
+	border-radius: var(--radius-sm);
+	text-decoration: none;
+	font-size: 0.875rem;
+	font-weight: 600;
+	transition: top 0.16s var(--ease);
+}
+
+.skip:focus {
+	top: 1rem;
+}

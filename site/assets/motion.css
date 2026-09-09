@@ -1,0 +1,163 @@
+/* ============================================================
+   motion.css — motor de animación scroll-driven estilo Apple
+   Landing "Caja de ingeniería PICO 2 Ultra".
+
+   Reglas duras respetadas:
+   - Solo se anima transform y opacity (nunca top/left/width/height).
+   - 100dvh, nunca 100vh. Sin clase h-screen. Sin #000000 puro.
+   - prefers-reduced-motion colapsa todo a estático.
+   - Easing Apple: cubic-bezier(0.16, 1, 0.3, 1), 0.4-0.8s.
+
+   Tokens de color/radio viven en base.css (--bg, --surface, --text,
+   --text-dim, --accent, --radius). Aquí NO se redefinen.
+   ============================================================ */
+
+:root {
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 0.6s;
+  --dur-slow: 0.8s;
+}
+
+/* ---------- 1. Hero: entrada fade + scale ---------- */
+@keyframes hero-in {
+  from { opacity: 0; transform: scale(0.96) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.hero-img {
+  animation: hero-in var(--dur-slow) var(--ease-apple) backwards;
+  will-change: transform, opacity;
+}
+
+/* El parallax lo aplica scroll.js como variable sobre el wrapper,
+   para no pisar la animación de entrada de .hero-img. */
+.hero-media {
+  transform: translateY(var(--parallax, 0px));
+  will-change: transform;
+}
+
+/* ---------- 2. Cinema dropscroll (efecto principal) ---------- */
+.cinema {
+  height: 300dvh; /* wrapper alto: da recorrido al pin */
+  position: relative;
+}
+
+.cinema-stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* la imagen ocupa el escenario; el texto va encima, legible */
+.cinema-media {
+  position: absolute;
+  inset: 0;
+}
+
+.cinema-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* solo un velo abajo para que el texto se lea: sin fondo en la foto
+     no hace falta oscurecer arriba */
+  background: linear-gradient(180deg, transparent 45%, rgba(8, 9, 12, 0.86) 100%);
+  pointer-events: none;
+}
+
+.cinema-text {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  padding-bottom: clamp(3rem, 12vh, 7rem);
+  min-height: 11rem;
+}
+
+/* las 3 captions se apilan en el mismo sitio para hacer crossfade */
+.cinema-caption {
+  grid-area: 1 / 1;
+  max-width: 34rem;
+}
+
+.cinema-text {
+  display: grid;
+}
+
+.cinema-caption .body {
+  margin-top: 0.75rem;
+}
+
+.cinema-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.cinema-frame picture,
+.cinema-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%; /* gana a picture img{height:auto} de base.css */
+  /* PNG sin fondo: contain para no cortar el producto. Sin fondo
+     que rellenar, el aire alrededor es el negro de la pagina. */
+  object-fit: contain;
+  object-position: center 42%;
+  padding: 12dvh 6vw 22dvh;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.6));
+}
+
+.cinema-caption {
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* estado inicial antes de que scroll.js tome el control */
+.cinema-frame[data-frame="0"],
+.cinema-caption[data-frame="0"] { opacity: 1; }
+
+/* ---------- 3. Reveal escalonado ---------- */
+/* .js-anim lo añade scroll.js: sin JS el contenido queda visible. */
+.js-anim [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur) var(--ease-apple),
+    transform var(--dur) var(--ease-apple);
+}
+
+.js-anim [data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- 4. Count-up ---------- */
+[data-countup] {
+  font-variant-numeric: tabular-nums; /* ancho fijo: sin saltos al contar */
+}
+
+/* ---------- 5. prefers-reduced-motion: todo estático ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-img {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* cinema: solo la ultima frame visible, sin crossfade progresivo.
+     Son 2 frames (0 y 1). Se usa :not() para ganarle en especificidad
+     a la regla base .cinema-frame[data-frame="0"]{opacity:1}. */
+  .cinema-frame:not([data-frame="1"]),
+  .cinema-caption:not([data-frame="1"]) { opacity: 0; }
+  .cinema-frame[data-frame="1"],
+  .cinema-caption[data-frame="1"] { opacity: 1; }
+
+  .js-anim [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
