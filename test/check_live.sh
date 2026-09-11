@@ -23,9 +23,10 @@ san=$(echo | openssl s_client -servername "$HOST" -connect "$HOST:443" 2>/dev/nu
       | openssl x509 -noout -ext subjectAltName 2>/dev/null)
 echo "$san" | grep -q "$HOST" && ok "cert cubre $HOST" || no "cert NO cubre $HOST"
 
-# 4. los 6 videos de TikTok (viven en tiktok.js, no en el HTML)
+# 4. los videos de TikTok (viven en tiktok.js, no en el HTML)
 curl -s --max-time 20 "$BASE/assets/tiktok.js" -o /tmp/pico_tiktok.js
-for v in 7683252903385173269 7682581386271771924 7682430154504899860 \
+for v in 7684054875650510100 7683691176272104724 7683630006991457557 \
+         7683252903385173269 7682581386271771924 7682430154504899860 \
          7682134228284214548 7682131762272570644 7682127178368992263; do
   grep -q "$v" /tmp/pico_tiktok.js && ok "video $v servido" || no "falta video $v"
 done

@@ -31,6 +31,9 @@ def read(*parts):
 
 # --- datos de verdad (del brief del usuario, no inventados) -----------------
 TIKTOK_IDS = [
+    "7684054875650510100",
+    "7683691176272104724",
+    "7683630006991457557",
     "7683252903385173269",
     "7682581386271771924",
     "7682430154504899860",
@@ -94,7 +97,7 @@ def test_content(html, text, bundle):
     for vid in TIKTOK_IDS:
         check(f"[content] video TikTok {vid} presente", vid in bundle)
     check("[content] exactamente 6 IDs de TikTok",
-          len({v for v in TIKTOK_IDS if v in bundle}) == 6)
+          len({v for v in TIKTOK_IDS if v in bundle}) == len(TIKTOK_IDS))
     check("[content] ningun ID de TikTok ajeno",
           not [i for i in set(re.findall(r"tiktok\.com/@[\w.]+/video/(\d{15,})", bundle))
                if i not in TIKTOK_IDS],

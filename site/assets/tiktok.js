@@ -1,5 +1,5 @@
 /* ============================================================
-   tiktok.js — Carrusel de 6 videos de TikTok (@imeiclick)
+   tiktok.js — Carrusel de videos de TikTok (@imeiclick)
 
    Enfoque: <iframe> directo a https://www.tiktok.com/embed/v2/<id>
    (verificado: HTTP 200, sin X-Frame-Options ni frame-ancestors).
@@ -20,9 +20,13 @@
 (function () {
 	"use strict";
 
-	// IDs reales de @imeiclick (verificados 2026-09-08 contra el
+	// IDs reales de @imeiclick (verificados 2026-09-11 contra el
 	// endpoint embed de TikTok). No inventar ni sustituir.
+	// Orden: mas reciente primero.
 	var VIDEO_IDS = [
+		"7684054875650510100",
+		"7683691176272104724",
+		"7683630006991457557",
 		"7683252903385173269",
 		"7682581386271771924",
 		"7682430154504899860",
