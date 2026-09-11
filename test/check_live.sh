@@ -27,11 +27,21 @@ echo "$san" | grep -q "$HOST" && ok "cert cubre $HOST" || no "cert NO cubre $HOS
 curl -s --max-time 20 "$BASE/assets/tiktok.js" -o /tmp/pico_tiktok.js
 for v in 7684054875650510100 7683691176272104724 7683630006991457557 \
          7683252903385173269 7682581386271771924 7682430154504899860 \
-         7682134228284214548 7682131762272570644 7682127178368992263; do
+         7682134228284214548 7682131762272570644; do
   grep -q "$v" /tmp/pico_tiktok.js && ok "video $v servido" || no "falta video $v"
 done
 
-# 5. el embed apunta al endpoint correcto de TikTok
+# 4b. posters locales servidos (click-to-play: nada se pide a TikTok al cargar)
+for v in 7684054875650510100 7683630006991457557 7682131762272570644; do
+  c=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 \
+       "$BASE/assets/img/tiktok/$v.jpg")
+  [ "$c" = "200" ] && ok "poster $v" || no "poster $v devolvio $c"
+done
+
+# 5. click-to-play: no debe quedar montaje automatico de iframes
+grep -q "IntersectionObserver" /tmp/pico_tiktok.js \
+  && no "tiktok.js aun monta iframes automaticamente" \
+  || ok "tiktok.js es click-to-play"
 grep -q "tiktok.com/embed/v2/" /tmp/pico_tiktok.js \
   && ok "embed iframe /embed/v2/ presente" || no "sin endpoint de embed"
 

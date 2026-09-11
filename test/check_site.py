@@ -39,7 +39,6 @@ TIKTOK_IDS = [
     "7682430154504899860",
     "7682134228284214548",
     "7682131762272570644",
-    "7682127178368992263",
 ]
 
 IPHONES = [
@@ -96,13 +95,22 @@ def contrast(fg, bg):
 def test_content(html, text, bundle):
     for vid in TIKTOK_IDS:
         check(f"[content] video TikTok {vid} presente", vid in bundle)
-    check("[content] exactamente 6 IDs de TikTok",
+    check("[content] exactamente 8 IDs de TikTok",
           len({v for v in TIKTOK_IDS if v in bundle}) == len(TIKTOK_IDS))
     check("[content] ningun ID de TikTok ajeno",
           not [i for i in set(re.findall(r"tiktok\.com/@[\w.]+/video/(\d{15,})", bundle))
                if i not in TIKTOK_IDS],
           "hay IDs que no son de @imeiclick")
     check("[content] cuenta @imeiclick referenciada", "@imeiclick" in bundle)
+    # click-to-play: no se monta ningun iframe hasta que el usuario toca.
+    # Se comprueba SOLO tiktok.js (scroll.js usa IntersectionObserver para
+    # las animaciones de reveal, no para iframes).
+    tiktok_js = strip_comments(read("assets", "tiktok.js"))
+    check("[content] tiktok.js es click-to-play (sin autoplay de iframes)",
+          "IntersectionObserver" not in tiktok_js and "tiktok-play" in tiktok_js,
+          "vuelve a montar iframes automaticamente")
+    check("[content] posters locales referenciados",
+          "assets/img/tiktok/" in tiktok_js)
 
     for m in IPHONES:
         check(f"[content] modelo {m}", m in text)
