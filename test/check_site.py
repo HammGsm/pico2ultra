@@ -134,6 +134,22 @@ def test_content(html, text, bundle):
     check("[content] nav-imei es pill con punto",
           re.search(r'nav-imei[\s\S]*?nav-imei-dot[\s\S]*?imeiclick\.com', html) is not None)
     check("[content] favicon referenciado", "favicon.ico" in html)
+    # badge iOS: el gancho comercial. from tachado -> flecha -> to destacado.
+    check("[content] badge iOS 26 -> 27 en hero",
+          re.search(r'ios-badge[\s\S]*?ios-badge-old[\s\S]*?ios-badge-arrow[\s\S]*?ios-badge-new', html)
+          is not None)
+    check("[content] badge dice iOS 27 soportado", "iOS 27" in html)
+    # aviso legal: 3 secciones + lista de 3 + bloque IMPORTANTE, cerrado
+    check("[content] aviso legal en footer",
+          re.search(r'<footer[\s\S]*?class="legal"[\s\S]*?legal-summary', html) is not None)
+    check("[content] aviso legal tiene las 3 secciones",
+          html.count('class="legal-h"') == 3)
+    check("[content] aviso legal cita la Ley 25.891", "25.891" in html)
+    check("[content] aviso legal lista los 3 puntos",
+          len(re.search(r'class="legal-list">([\s\S]*?)</ul>', html).group(1).split("<li>")) - 1 == 3)
+    check("[content] aviso legal bloque IMPORTANTE", 'class="legal-warn"' in html)
+    check("[content] aviso legal cerrado por defecto",
+          not re.search(r'<details[^>]*\sopen', html))
     # cross-promo: bloque con los colores de imeiclick.com y CTA a /free
     # (el href imeiclick.com/free va antes del texto del CTA en la misma linea)
     check("[content] cross-promo imeiclick",
