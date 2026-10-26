@@ -1,59 +1,111 @@
 {
-  "meta": {
-    "title": "PICO 2 Ultra: bypass iCloud sin cambiar cables ni DFU manual",
-    "description": "Caja de ingeniería PICO 2 Ultra con chip RP2354A. Modo DFU y PWND con un click, DCSD sin cambiar cables. Compatible con iPhone XR a 11 y iPad. Pide por WhatsApp.",
-    "og_title": "PICO 2 Ultra: DFU y PWND con un click",
-    "og_description": "Bypass iCloud sin cambiar cables ni rezar para entrar en DFU. Chip RP2354A, puerto Type-C estable. Compatible con iPhone XR a 11 y iPad."
-  },
-  "hero": {
-    "eyebrow": "Caja de ingeniería",
-    "h1": "Entra a DFU sin tocar un cable",
-    "sub": "Bypass iCloud con un click, sin cambiar cables ni pelear con el DFU manual. Menos tiempo por reparación, menos riesgo para el equipo del cliente.",
-    "cta": "Más información por WhatsApp",
-    "cta_note": "Precio y stock al instante"
-  },
-  "cinema": {
-    "frames": [
-      {"title": "Conectas por Type-C", "body": "Reconocimiento estable y respuesta rápida, sin pelear con el cable."},
-      {"title": "Un click: DFU o PWND", "body": "Entra sola al modo que necesitas y sigues con el bypass. Siguiente equipo."}
-    ]
-  },
-  "oneclick": {
-    "title": "Dos modos, un click cada uno",
-    "body": "Olvídate de rezar para entrar en DFU a mano. La caja entra sola al modo que necesitas, sin cambiar cables.",
-    "dfu": {"label": "DFU", "body": "Entra automáticamente al modo DFU con un solo click."},
-    "pwnd": {"label": "PWND", "body": "Entra automáticamente al modo PWND con un solo click."}
-  },
-  "chip": {
-    "eyebrow": "Chip de tercera generación",
-    "title": "RP2354A de alto rendimiento",
-    "body": "El chip RP2354A de tercera generación mueve el trabajo con estabilidad, sin cuelgues a mitad de reparación.",
-    "stat_label": "Chip RP2354A"
-  },
-  "grid": {
-    "title": "Pensada para el taller",
-    "items": [
-      {"title": "Type-C estable", "body": "Reconocimiento estable y respuesta rápida, sin desconexiones a mitad de trabajo."},
-      {"title": "Múltiples protecciones", "body": "Diseño con protecciones para cuidar tus dispositivos y los del cliente."},
-      {"title": "Compacta y portátil", "body": "Cabe en el bolsillo de la mochila, lista para llevar a domicilio."},
-      {"title": "DCSD sin cambiar cables", "body": "Función DCSD integrada, sin necesidad de cambiar cables."}
-    ]
-  },
-  "compat": {
-    "eyebrow": "Compatibilidad real",
-    "title": "Modelos que sí cubre",
-    "note": "Cubre iPhone XR a 11 y iPad mini 5 a 9.ª generación. No prometemos todo el catálogo Apple."
-  },
-  "tiktok": {
-    "title": "Mírala trabajando",
-    "body": "En @imeiclick hay demos reales de la PICO 2 Ultra haciendo bypass con UnlockTool. Mira antes de pedir."
-  },
-  "close": {
-    "title": "Deja de pelear con el DFU manual",
-    "body": "Pide la PICO 2 Ultra y entra a DFU y PWND con un click. Menos tiempo por reparación, menos riesgo para el equipo del cliente.",
-    "cta": "Más información por WhatsApp"
-  },
-  "footer": {
-    "tagline": "Bypass iCloud con un click, sin cambiar cables."
+ "meta": {
+  "title": "PICO 2 Ultra: bypass iCloud sin cambiar cables ni DFU manual",
+  "description": "Caja de ingeniería PICO 2 Ultra con chip RP2354A. Modo DFU y PWND con un click, DCSD sin cambiar cables. Compatible con iPhone XR a 11 y iPad. Pide por WhatsApp.",
+  "og_title": "PICO 2 Ultra: DFU y PWND con un click",
+  "og_description": "Bypass iCloud sin cambiar cables ni rezar para entrar en DFU. Chip RP2354A, puerto Type-C estable. Compatible con iPhone XR a 11 y iPad."
+ },
+ "hero": {
+  "eyebrow": "Caja de ingeniería",
+  "h1": "Entra a DFU sin tocar un cable",
+  "sub": "Bypass iCloud con un click, sin cambiar cables ni pelear con el DFU manual. Menos tiempo por reparación, menos riesgo para el equipo del cliente.",
+  "cta": "Más información por WhatsApp",
+  "cta_note": "Precio y stock al instante",
+  "ios_badge": {
+   "from": "Soporta iOS 26",
+   "to": "Actualizado a iOS 27 soportado"
   }
+ },
+ "cinema": {
+  "frames": [
+   {
+    "title": "Conectas por Type-C",
+    "body": "Reconocimiento estable y respuesta rápida, sin pelear con el cable."
+   },
+   {
+    "title": "Un click: DFU o PWND",
+    "body": "Entra sola al modo que necesitas y sigues con el bypass. Siguiente equipo."
+   }
+  ]
+ },
+ "oneclick": {
+  "title": "Dos modos, un click cada uno",
+  "body": "Olvídate de rezar para entrar en DFU a mano. La caja entra sola al modo que necesitas, sin cambiar cables.",
+  "dfu": {
+   "label": "DFU",
+   "body": "Entra automáticamente al modo DFU con un solo click."
+  },
+  "pwnd": {
+   "label": "PWND",
+   "body": "Entra automáticamente al modo PWND con un solo click."
+  }
+ },
+ "chip": {
+  "eyebrow": "Chip de tercera generación",
+  "title": "RP2354A de alto rendimiento",
+  "body": "El chip RP2354A de tercera generación mueve el trabajo con estabilidad, sin cuelgues a mitad de reparación.",
+  "stat_label": "Chip RP2354A"
+ },
+ "grid": {
+  "title": "Pensada para el taller",
+  "items": [
+   {
+    "title": "Type-C estable",
+    "body": "Reconocimiento estable y respuesta rápida, sin desconexiones a mitad de trabajo."
+   },
+   {
+    "title": "Múltiples protecciones",
+    "body": "Diseño con protecciones para cuidar tus dispositivos y los del cliente."
+   },
+   {
+    "title": "Compacta y portátil",
+    "body": "Cabe en el bolsillo de la mochila, lista para llevar a domicilio."
+   },
+   {
+    "title": "DCSD sin cambiar cables",
+    "body": "Función DCSD integrada, sin necesidad de cambiar cables."
+   }
+  ]
+ },
+ "compat": {
+  "eyebrow": "Compatibilidad real",
+  "title": "Modelos que sí cubre",
+  "note": "Cubre iPhone XR a 11 y iPad mini 5 a 9.ª generación. No prometemos todo el catálogo Apple."
+ },
+ "tiktok": {
+  "title": "Mírala trabajando",
+  "body": "En @imeiclick hay demos reales de la PICO 2 Ultra haciendo bypass con UnlockTool. Mira antes de pedir."
+ },
+ "close": {
+  "title": "Deja de pelear con el DFU manual",
+  "body": "Pide la PICO 2 Ultra y entra a DFU y PWND con un click. Menos tiempo por reparación, menos riesgo para el equipo del cliente.",
+  "cta": "Más información por WhatsApp"
+ },
+ "footer": {
+  "tagline": "Bypass iCloud con un click, sin cambiar cables."
+ },
+ "legal": {
+  "title": "Aviso legal y descargo de responsabilidad",
+  "subtitle": "Cumplimiento Normativo y Marco Ético de Uso",
+  "sections": [
+   {
+    "h": "1. Propósito educativo e informativo",
+    "p": "El contenido publicado en este canal/medio, incluyendo el material referido al uso del programador Pico 2 Ultra u herramientas afines, tiene un fin exclusivamente educativo, didáctico y de soporte técnico ético. Está dirigido a usuarios legítimos que hayan olvidado sus credenciales (como cuenta de iCloud) o a técnicos de servicio de mantenimiento."
+   },
+   {
+    "h": "2. Cumplimiento normativo (Ley N.º 25.891)",
+    "p": "En estricto cumplimiento de la legislación de la República Argentina (Ley N.º 25.891 de Servicios de Comunicaciones Móviles y sus reglamentaciones):",
+    "list": [
+     "No se ofrecen ni prestan servicios de desbloqueo o alteración ilegítima de equipos.",
+     "No promovemos, incentivamos ni facilitamos el uso de estas herramientas para dispositivos de procedencia ilícita, robados, hurtados o denunciados en la lista negra.",
+     "Queda rotundamente prohibida la modificación o adulteración del código de identificación único de los equipos (IMEI)."
+    ]
+   },
+   {
+    "h": "3. Responsabilidad del usuario",
+    "p": "Cada usuario es responsable de verificar la titularidad legítima del dispositivo sobre el cual aplique cualquier procedimiento. El creador de este contenido no se responsabiliza por el uso indebido, ilegal o contrario a las normativas vigentes que terceros puedan darle a la información aquí expuesta."
+   }
+  ],
+  "warning": "IMPORTANTE: El acceso o la manipulación de dispositivos sin la debida autorización de su titular legítimo constituye una infracción legal. Asegúrese de contar con la documentación probatoria de dominio previo a realizar cualquier intervención técnica."
+ }
 }

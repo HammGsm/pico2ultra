@@ -54,6 +54,16 @@ def picture(base, alt, cls="", eager=False, sizes="(max-width: 900px) 92vw, 520p
 				</picture>"""
 
 
+# Aviso legal: una seccion por item, con lista opcional. Escapado estricto.
+def _legal_section(s):
+    items = "".join(f"<li>{e(i)}</li>" for i in s.get("list") or [])
+    ul = f"\n\t\t\t\t\t\t<ul class=\"legal-list\">{items}</ul>" if items else ""
+    return (f"\t\t\t\t\t<h3 class=\"legal-h\">{e(s['h'])}</h3>\n"
+            f"\t\t\t\t\t<p>{e(s['p'])}</p>{ul}")
+
+legal_sections = "\n".join(_legal_section(s) for s in C["legal"]["sections"])
+
+
 frames = "\n".join(
     f"""				<div class="cinema-frame" data-frame="{i}">{picture(img, alt)}</div>"""
     for i, (img, alt) in enumerate(FRAME_IMG)
@@ -151,6 +161,11 @@ DOC = f"""<!doctype html>
 			<div class="wrap hero-grid">
 				<div class="hero-copy">
 					<p class="eyebrow">{e(C['hero']['eyebrow'])}</p>
+					<div class="ios-badge" data-ios-badge role="note">
+						<span class="ios-badge-old">{e(C['hero']['ios_badge']['from'])}</span>
+						<svg class="ios-badge-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+						<span class="ios-badge-new">{e(C['hero']['ios_badge']['to'])}</span>
+					</div>
 					<h1 class="display">{e(C['hero']['h1'])}</h1>
 					<p class="body">{e(C['hero']['sub'])}</p>
 					<div class="cta-row">
@@ -300,6 +315,16 @@ DOC = f"""<!doctype html>
 				<a href="https://imeiclick.com/" target="_blank" rel="noopener">imeiclick.com</a>
 				<a href="https://www.tiktok.com/@imeiclick" target="_blank" rel="noopener">@imeiclick</a>
 			</div>
+		</div>
+		<div class="wrap">
+			<details class="legal">
+				<summary class="legal-summary">{e(C['legal']['title'])}</summary>
+				<div class="legal-body">
+					<p class="legal-sub">{e(C['legal']['subtitle'])}</p>
+{legal_sections}
+					<p class="legal-warn">{e(C['legal']['warning'])}</p>
+				</div>
+			</details>
 		</div>
 	</footer>
 

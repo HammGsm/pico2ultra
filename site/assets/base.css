@@ -717,6 +717,146 @@ section {
 	color: var(--text);
 }
 
+/* --- badge iOS: "Soporta iOS 26 -> iOS 27" ------------------------------ */
+.ios-badge {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 0.9rem;
+	padding: 0.4rem 0.8rem 0.4rem 0.45rem;
+	border: 1px solid rgba(79, 214, 232, 0.28);
+	border-radius: var(--pill);
+	background: linear-gradient(90deg, rgba(79, 214, 232, 0.10), rgba(16, 185, 129, 0.07));
+	font-size: 0.78125rem;
+	line-height: 1.2;
+}
+
+/* logo Apple en azul: el "iOS 27" es lo que se quiere leer primero */
+.ios-badge::before {
+	content: "";
+	width: 0.95rem;
+	height: 0.95rem;
+	flex: 0 0 auto;
+	background-color: #4a9eff;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.365 1.43c0 1.14-.42 2.2-1.26 3.03-.9.9-1.98 1.42-3.1 1.33-.09-1.1.4-2.2 1.2-3.02.87-.9 2.1-1.44 3.16-1.34zM20.6 17.1c-.35.8-.77 1.55-1.27 2.24-.75 1.05-1.36 1.78-1.84 2.18-.73.66-1.5 1-2.33 1.03-.6 0-1.32-.17-2.16-.52-.84-.35-1.6-.52-2.3-.52-.73 0-1.51.17-2.35.52-.84.35-1.53.53-2.07.55-.79.03-1.58-.32-2.36-1.05-.52-.44-1.16-1.2-1.92-2.28-.82-1.15-1.49-2.47-2.02-3.99C1.2 13.7.93 12.2.93 10.75c0-1.66.36-3.1 1.08-4.3.57-.97 1.32-1.73 2.26-2.3.94-.56 1.96-.85 3.06-.88.65 0 1.5.2 2.55.6 1.05.4 1.73.6 2.03.6.23 0 .98-.24 2.26-.71 1.2-.44 2.22-.62 3.05-.55 2.24.18 3.92 1.06 5.04 2.65-2.01 1.22-3 2.92-2.98 5.1.02 1.7.63 3.11 1.83 4.24.54.52 1.15.92 1.82 1.2-.15.43-.3.84-.47 1.24z'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.365 1.43c0 1.14-.42 2.2-1.26 3.03-.9.9-1.98 1.42-3.1 1.33-.09-1.1.4-2.2 1.2-3.02.87-.9 2.1-1.44 3.16-1.34zM20.6 17.1c-.35.8-.77 1.55-1.27 2.24-.75 1.05-1.36 1.78-1.84 2.18-.73.66-1.5 1-2.33 1.03-.6 0-1.32-.17-2.16-.52-.84-.35-1.6-.52-2.3-.52-.73 0-1.51.17-2.35.52-.84.35-1.53.53-2.07.55-.79.03-1.58-.32-2.36-1.05-.52-.44-1.16-1.2-1.92-2.28-.82-1.15-1.49-2.47-2.02-3.99C1.2 13.7.93 12.2.93 10.75c0-1.66.36-3.1 1.08-4.3.57-.97 1.32-1.73 2.26-2.3.94-.56 1.96-.85 3.06-.88.65 0 1.5.2 2.55.6 1.05.4 1.73.6 2.03.6.23 0 .98-.24 2.26-.71 1.2-.44 2.22-.62 3.05-.55 2.24.18 3.92 1.06 5.04 2.65-2.01 1.22-3 2.92-2.98 5.1.02 1.7.63 3.11 1.83 4.24.54.52 1.15.92 1.82 1.2-.15.43-.3.84-.47 1.24z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.ios-badge-old {
+	color: var(--text-dim);
+	text-decoration: line-through;
+	text-decoration-color: rgba(255, 255, 255, 0.28);
+}
+
+.ios-badge-arrow {
+	color: #4a9eff;
+	flex: 0 0 auto;
+	transform: translateX(-2px);
+	transition: transform 0.35s var(--ease);
+}
+
+.ios-badge:hover .ios-badge-arrow {
+	transform: translateX(2px);
+}
+
+.ios-badge-new {
+	font-weight: 700;
+	color: #4a9eff;
+}
+
+@media (max-width: 400px) {
+	.ios-badge {
+		font-size: 0.73rem;
+	}
+}
+
+/* --- aviso legal: <details> en el footer -------------------------------- */
+.legal {
+	border-top: 1px solid var(--hairline);
+	margin-top: 0.5rem;
+	padding-bottom: 2rem;
+}
+
+.legal-summary {
+	cursor: pointer;
+	list-style: none;
+	padding: 1rem 1.75rem 1rem 0;
+	position: relative;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--text-dim);
+	transition: color 0.2s var(--ease);
+}
+
+.legal-summary::-webkit-details-marker {
+	display: none;
+}
+
+/* chevron propio: gira al abrir */
+.legal-summary::after {
+	content: "";
+	position: absolute;
+	right: 0.25rem;
+	top: 50%;
+	width: 0.5rem;
+	height: 0.5rem;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
+	transform: translateY(-70%) rotate(45deg);
+	transition: transform 0.3s var(--ease);
+}
+
+.legal[open] .legal-summary::after {
+	transform: translateY(-30%) rotate(-135deg);
+}
+
+.legal-summary:hover,
+.legal-summary:focus-visible {
+	color: var(--text);
+}
+
+.legal-body {
+	max-width: 70ch;
+	padding-bottom: 0.5rem;
+	font-size: 0.8125rem;
+	line-height: 1.65;
+	color: var(--text-dim);
+}
+
+.legal-sub {
+	font-weight: 600;
+	color: var(--text);
+	margin-bottom: 1.1rem;
+}
+
+.legal-h {
+	margin: 1.25rem 0 0.35rem;
+	font-size: 0.8125rem;
+	font-weight: 700;
+	color: var(--text);
+	letter-spacing: 0.01em;
+}
+
+.legal-list {
+	margin: 0.5rem 0 0 1.1rem;
+	padding: 0;
+	display: grid;
+	gap: 0.4rem;
+}
+
+.legal-warn {
+	margin-top: 1.4rem;
+	padding: 0.9rem 1rem;
+	border: 1px solid rgba(251, 191, 36, 0.28);
+	border-left-width: 3px;
+	border-radius: 0.5rem;
+	background: rgba(251, 191, 36, 0.06);
+	color: #fcd34d;
+	font-size: 0.78125rem;
+	line-height: 1.6;
+}
+
 .foot-links {
 	display: flex;
 	align-items: center;
