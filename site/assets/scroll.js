@@ -73,22 +73,21 @@
 
       var p = clamp(-rect.top / total, 0, 1); /* 0..1 a lo largo del pin */
 
-      /* crossfade con curva suave en vez de triangular lineal: la triangular
-         hace que el frame se quede casi invisible hasta la mitad del tramo
-         y aparece de golpe. smoothstep reparte el cambio en todo el recorrido. */
+      /* smoothstep sobre todo el recorrido: entrada y salida sin escalon, que
+         es lo que hace que el cruce se sienta suave. La velocidad la da la
+         altura del wrapper (.cinema), no esta curva. */
       var n = frames.length;
       for (var i = 0; i < n; i++) {
         var c = n === 1 ? 0 : i / (n - 1);
         var w = n === 1 ? 1 : 1 / (n - 1);
         var t = clamp(1 - Math.abs(p - c) / w, 0, 1);
         var o = t * t * (3 - 2 * t); /* smoothstep */
-        frames[i].style.opacity = o;
-        /* parallax minimo: el frame entrante se asienta, no salta.
-           1.04 -> 1 = se percibe movimiento sin marear. */
-        frames[i].style.transform = "scale(" + (1.04 - 0.04 * o).toFixed(4) + ")";
+        frames[i].style.opacity = o.toFixed(3);
+        /* parallax minimo: el frame entrante se asienta, no salta. */
+        frames[i].style.transform = "scale(" + (1.035 - 0.035 * o).toFixed(4) + ")";
         if (captions[i]) {
-          captions[i].style.opacity = o;
-          captions[i].style.transform = "translateY(" + ((1 - o) * 14).toFixed(1) + "px)";
+          captions[i].style.opacity = o.toFixed(3);
+          captions[i].style.transform = "translateY(" + ((1 - o) * 10).toFixed(1) + "px)";
         }
       }
     });

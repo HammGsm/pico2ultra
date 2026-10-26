@@ -717,106 +717,139 @@ section {
 	color: var(--text);
 }
 
-/* --- badge iOS: "Soporta iOS 26 -> iOS 27" ------------------------------ */
-/* Se lee como una insignia de producto, no como texto de relleno:
-   chip azul con el logo dentro, el "antes" apagado y tachado, y el
-   "ahora" en una pastilla solida azul que es lo primero que fija la vista. */
+/* --- badge iOS: "iOS 26 -> iOS 27 soportado" ------------------------------ */
+/* Insignia de producto, no texto de relleno: halo azul animado que atrae la
+   vista sin competir con el H1, logo Apple en chip con brillo, el "antes"
+   apagado y tachado, y el "ahora" en pastilla solida que late una vez. */
 .ios-badge {
+	position: relative;
 	display: inline-flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 0.55rem;
-	margin-top: 1rem;
-	padding: 0.3rem 0.35rem 0.3rem 0.3rem;
-	border: 1px solid rgba(74, 158, 255, 0.32);
+	gap: 0.6rem;
+	margin-top: 1.15rem;
+	padding: 0.35rem 0.4rem 0.35rem 0.35rem;
+	border: 1px solid rgba(74, 158, 255, 0.45);
 	border-radius: var(--pill);
 	background:
-		radial-gradient(120% 180% at 0% 50%, rgba(74, 158, 255, 0.20), transparent 62%),
-		rgba(255, 255, 255, 0.04);
+		linear-gradient(120deg, rgba(74, 158, 255, 0.22), rgba(74, 158, 255, 0.04) 45%, rgba(74, 158, 255, 0.14)),
+		rgba(8, 14, 26, 0.55);
 	box-shadow:
-		0 1px 0 rgba(255, 255, 255, 0.06) inset,
-		0 8px 26px -14px rgba(74, 158, 255, 0.55);
-	font-size: 0.8125rem;
+		0 1px 0 rgba(255, 255, 255, 0.10) inset,
+		0 0 0 1px rgba(74, 158, 255, 0.10),
+		0 12px 34px -16px rgba(74, 158, 255, 0.9);
+	font-size: 0.875rem;
 	line-height: 1.15;
+	animation: ios-badge-glow 3.6s ease-in-out infinite;
 }
 
-/* chip del logo: el azul Apple sobre su propio halo */
+/* halo que respira: sube y baja la sombra, nunca el tamano (no reflow) */
+@keyframes ios-badge-glow {
+	0%, 100% { box-shadow: 0 1px 0 rgba(255,255,255,0.10) inset, 0 0 0 1px rgba(74,158,255,0.10), 0 12px 34px -16px rgba(74,158,255,0.9); }
+	50%      { box-shadow: 0 1px 0 rgba(255,255,255,0.16) inset, 0 0 0 1px rgba(74,158,255,0.26), 0 16px 44px -14px rgba(74,158,255,1); }
+}
+
+/* chip del logo: azul Apple sobre su propio halo */
 .ios-badge-logo {
+	position: relative;
 	display: grid;
 	place-items: center;
-	width: 1.75rem;
-	height: 1.75rem;
+	width: 2rem;
+	height: 2rem;
 	flex: 0 0 auto;
 	border-radius: 50%;
-	background: linear-gradient(160deg, #5aa9ff, #2f7fe0);
-	box-shadow: 0 2px 10px -2px rgba(74, 158, 255, 0.7);
+	background: linear-gradient(160deg, #6db4ff, #2f7fe0 70%);
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+		0 3px 14px -2px rgba(74, 158, 255, 0.9);
 }
 
 .ios-badge-logo svg {
-	width: 1rem;
-	height: 1rem;
+	width: 1.15rem;
+	height: 1.15rem;
 	fill: #fff;
+	/* brillo sutil que recorre el logo una vez al cargar */
+	animation: ios-badge-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+
+@keyframes ios-badge-pop {
+	from { transform: scale(0.6); opacity: 0; }
+	to   { transform: scale(1); opacity: 1; }
 }
 
 .ios-badge-old {
-	padding-left: 0.15rem;
-	color: rgba(255, 255, 255, 0.62);
+	padding-left: 0.1rem;
+	color: rgba(255, 255, 255, 0.72);
 	font-weight: 500;
 	text-decoration: line-through;
-	text-decoration-color: rgba(255, 255, 255, 0.45);
-	text-decoration-thickness: 1.5px;
+	text-decoration-color: #ff6b6b;
+	text-decoration-thickness: 2px;
 }
 
 .ios-badge-arrow {
-	color: #4a9eff;
+	color: #6db4ff;
 	flex: 0 0 auto;
-	transform: translateX(-3px);
-	transition: transform 0.35s var(--ease);
+	filter: drop-shadow(0 0 6px rgba(74, 158, 255, 0.8));
+	transition: transform 0.3s var(--ease);
 }
 
 .ios-badge:hover .ios-badge-arrow {
-	transform: translateX(1px);
+	transform: translateX(2px);
 }
 
-/* el "ahora": pastilla solida, el ancla visual del badge */
+/* el "ahora": pastilla solida con degradado, el ancla visual del badge */
 .ios-badge-new {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.4rem;
-	padding: 0.35rem 0.7rem 0.35rem 0.35rem;
+	gap: 0.45rem;
+	padding: 0.4rem 0.8rem 0.4rem 0.4rem;
 	border-radius: var(--pill);
-	background: linear-gradient(160deg, #5aa9ff, #2f7fe0);
+	background: linear-gradient(160deg, #7cc0ff, #2f7fe0 62%, #1f63c4);
 	color: #fff;
-	font-weight: 700;
+	font-weight: 800;
 	letter-spacing: 0.005em;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+	box-shadow:
+		0 1px 0 rgba(255, 255, 255, 0.45) inset,
+		0 2px 10px rgba(47, 127, 224, 0.55);
 }
 
 /* etiqueta de estado: da el peso de "sello" sin alargar la frase */
 .ios-badge-tag {
-	padding: 0.15rem 0.4rem;
+	padding: 0.18rem 0.42rem;
 	border-radius: calc(var(--pill) / 2);
-	background: rgba(0, 0, 0, 0.28);
+	background: rgba(0, 0, 0, 0.42);
 	color: #fff;
 	font-size: 0.625rem;
-	font-weight: 800;
-	letter-spacing: 0.06em;
+	font-weight: 900;
+	letter-spacing: 0.07em;
 	text-transform: uppercase;
 }
 
 @media (max-width: 420px) {
 	.ios-badge {
-		font-size: 0.75rem;
+		font-size: 0.8125rem;
 		gap: 0.45rem;
 	}
 
 	.ios-badge-logo {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 1.75rem;
+		height: 1.75rem;
+	}
+
+	.ios-badge-logo svg {
+		width: 1rem;
+		height: 1rem;
 	}
 
 	.ios-badge-new {
-		padding: 0.3rem 0.6rem;
+		padding: 0.32rem 0.6rem 0.32rem 0.32rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ios-badge,
+	.ios-badge-logo svg {
+		animation: none;
 	}
 }
 

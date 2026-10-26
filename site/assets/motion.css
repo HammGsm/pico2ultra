@@ -41,7 +41,9 @@
 
 /* ---------- 2. Cinema dropscroll (efecto principal) ---------- */
 .cinema {
-  height: 300dvh; /* wrapper alto: da recorrido al pin */
+  /* 200dvh: con 2 frames, 300dvh obligaba a scrollear 3 pantallas para un
+     solo cruce -> se sentia lento. 200dvh mantiene el pin sin arrastrarse. */
+  height: 200dvh;
   position: relative;
 }
 
@@ -99,7 +101,7 @@
   will-change: opacity, transform;
   /* el JS escribe opacity/transform en cada frame de scroll: una transicion
      corta suaviza el salto entre rAF y evita el aspecto "a tirones". */
-  transition: opacity 0.18s linear, transform 0.18s linear;
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cinema-frame picture,
