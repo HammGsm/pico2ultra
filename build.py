@@ -96,7 +96,18 @@ for i, item in enumerate(gi):
 cells = "\n".join(cells)
 
 iphone_chips = "\n".join(f"						<li>{e(m)}</li>" for m in IPHONES)
-ipad_chips = "\n".join(f"						<li>{e(m)}</li>" for m in IPADS)
+ipad_chips = "\n".join(f"							<li>{e(m)}</li>" for m in IPADS)
+
+T = "\t"
+compat_cards = "\n".join(
+    f"""\t\t\t\t\t<div class="compat-card" data-reveal data-reveal-delay="{i*70}">
+\t\t\t\t\t\t<span class="compat-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+\t\t\t\t\t\t<div>
+\t\t\t\t\t\t\t<p class="compat-card-t">{e(k['t'])}</p>
+\t\t\t\t\t\t\t<p class="compat-card-d">{e(k['d'])}</p>
+\t\t\t\t\t\t</div>
+\t\t\t\t\t</div>"""
+    for i, k in enumerate(C["compat"]["cards"]))
 
 DOC = f"""<!doctype html>
 <html lang="es">
@@ -161,12 +172,12 @@ DOC = f"""<!doctype html>
 			<div class="wrap hero-grid">
 				<div class="hero-copy">
 					<p class="eyebrow">{e(C['hero']['eyebrow'])}</p>
-					<div class="ios-badge" data-ios-badge role="note">
-						<span class="ios-badge-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16.365 1.43c0 1.14-.42 2.2-1.26 3.03-.9.9-1.98 1.42-3.1 1.33-.09-1.1.4-2.2 1.2-3.02.87-.9 2.1-1.44 3.16-1.34zM20.6 17.1c-.35.8-.77 1.55-1.27 2.24-.75 1.05-1.36 1.78-1.84 2.18-.73.66-1.5 1-2.33 1.03-.6 0-1.32-.17-2.16-.52-.84-.35-1.6-.52-2.3-.52-.73 0-1.51.17-2.35.52-.84.35-1.53.53-2.07.55-.79.03-1.58-.32-2.36-1.05-.52-.44-1.16-1.2-1.92-2.28-.82-1.15-1.49-2.47-2.02-3.99C1.2 13.7.93 12.2.93 10.75c0-1.66.36-3.1 1.08-4.3.57-.97 1.32-1.73 2.26-2.3.94-.56 1.96-.85 3.06-.88.65 0 1.5.2 2.55.6 1.05.4 1.73.6 2.03.6.23 0 .98-.24 2.26-.71 1.2-.44 2.22-.62 3.05-.55 2.24.18 3.92 1.06 5.04 2.65-2.01 1.22-3 2.92-2.98 5.1.02 1.7.63 3.11 1.83 4.24.54.52 1.15.92 1.82 1.2-.15.43-.3.84-.47 1.24z"/></svg></span>
+					<a class="ios-badge" data-ios-badge href="#compatibilidad" aria-label="Ver compatibilidad con iOS 27">
+						<span class="ios-badge-logo" aria-hidden="true"><svg viewBox="0 0 814 1000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57-155.5-127C46.7 790.7 0 663 0 541.8c0-194.4 126.4-297.5 250.8-297.5 66.1 0 121.2 43.4 162.7 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg></span>
 						<span class="ios-badge-old">{e(C['hero']['ios_badge']['from'])}</span>
 						<svg class="ios-badge-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
 						<span class="ios-badge-new"><span class="ios-badge-tag">{e(C['hero']['ios_badge']['tag'])}</span>{e(C['hero']['ios_badge']['to'])}</span>
-					</div>
+					</a>
 					<h1 class="display">{e(C['hero']['h1'])}</h1>
 					<p class="body">{e(C['hero']['sub'])}</p>
 					<div class="cta-row">
@@ -236,12 +247,24 @@ DOC = f"""<!doctype html>
 			</div>
 		</section>
 
-		<!-- 6. Compatibilidad -->
-		<section class="pad-y hairline-top">
+		<!-- 6. Compatibilidad iOS 27 -->
+		<section class="compat pad-y hairline-top" id="compatibilidad" aria-labelledby="compat-h">
 			<div class="wrap">
-				<p class="eyebrow">{e(C['compat']['eyebrow'])}</p>
-				<h2 class="h2" data-reveal>{e(C['compat']['title'])}</h2>
-				<div class="compat-cols">
+				<div class="compat-panel">
+					<div class="compat-copy">
+						<p class="compat-kicker">
+							<span class="compat-kicker-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+							{e(C['compat']['eyebrow'])}
+						</p>
+						<h2 class="h2 compat-h" id="compat-h" data-reveal>{e(C['compat']['title'])}</h2>
+						<p class="compat-lede" data-reveal data-reveal-delay="60">{e(C['compat']['lede'])}</p>
+						<a class="cta compat-cta" href="{e(C['compat']['cta']['href'])}" target="_blank" rel="noopener" data-reveal data-reveal-delay="120">{e(C['compat']['cta']['t'])}</a>
+					</div>
+					<div class="compat-side">
+{compat_cards}
+					</div>
+				</div>
+				<div class="compat-models">
 					<div class="compat-group" data-reveal>
 						<h3>iPhone</h3>
 						<ul class="chips">

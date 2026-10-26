@@ -150,6 +150,15 @@ def test_content(html, text, bundle):
     check("[content] aviso legal bloque IMPORTANTE", 'class="legal-warn"' in html)
     check("[content] aviso legal cerrado por defecto",
           not re.search(r'<details[^>]*\sopen', html))
+    # compatibilidad iOS 27: seccion propia y el badge del hero lleva a ella
+    check("[content] seccion compatibilidad con id", 'id="compatibilidad"' in html)
+    check("[content] badge iOS enlaza a compatibilidad",
+          re.search(r'<a[^>]*class="ios-badge"[^>]*href="#compatibilidad"', html) is not None)
+    check("[content] compatibilidad tiene 3 tarjetas", html.count('class="compat-card"') == 3)
+    check("[content] compatibilidad lista iPhone e iPad",
+          ">iPhone<" in html and ">iPad<" in html)
+    check("[content] logo Apple es el path oficial (814x1000)",
+          'viewBox="0 0 814 1000"' in html)
     # cross-promo: bloque con los colores de imeiclick.com y CTA a /free
     # (el href imeiclick.com/free va antes del texto del CTA en la misma linea)
     check("[content] cross-promo imeiclick",

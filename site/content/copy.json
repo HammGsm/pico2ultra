@@ -69,9 +69,29 @@
   ]
  },
  "compat": {
-  "eyebrow": "Compatibilidad real",
-  "title": "Modelos que sí cubre",
-  "note": "Cubre iPhone XR a 11 y iPad mini 5 a 9.ª generación. No prometemos todo el catálogo Apple."
+  "eyebrow": "Compatibilidad iOS 27",
+  "title": "¿Tu equipo entra?",
+  "link": "Ver compatibilidad completa",
+  "lede": "La PICO 2 Ultra trabaja sobre la línea que sí cubre. Si tu modelo está en la lista, entra sin sorpresas.",
+  "cards": [
+   {
+    "t": "iPhone XR a 11",
+    "d": "Toda la familia, incluido el 11 Pro Max."
+   },
+   {
+    "t": "iPad mini 5 a 9.ª gen",
+    "d": "Chip A12 en adelante."
+   },
+   {
+    "t": "iOS 26 y iOS 27",
+    "d": "Firmware al día, sin pasos manuales."
+   }
+  ],
+  "note": "Cubre iPhone XR a 11 y iPad mini 5 a 9.ª generación. No prometemos todo el catálogo Apple.",
+  "cta": {
+   "t": "Ver si mi equipo entra",
+   "href": "https://wa.me/5491166658740?text=Hola%2C%20quiero%20confirmar%20si%20mi%20equipo%20es%20compatible%20con%20la%20PICO%202%20Ultra"
+  }
  },
  "tiktok": {
   "title": "Mírala trabajando",

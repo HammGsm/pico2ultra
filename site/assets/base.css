@@ -629,19 +629,6 @@ section {
 
 /* --- compatibilidad --------------------------------------------------- */
 
-.compat-cols {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: clamp(2rem, 4vw, 3rem);
-	margin-top: 2.5rem;
-}
-
-@media (min-width: 760px) {
-	.compat-cols {
-		grid-template-columns: 1.4fr 1fr;
-	}
-}
-
 .compat-group h3 {
 	font-family: var(--font-mono);
 	font-size: 0.75rem;
@@ -668,6 +655,143 @@ section {
 	background: var(--surface);
 	font-size: 0.875rem;
 	white-space: nowrap;
+}
+
+/* --- Compatibilidad iOS 27: panel de dos columnas ------------------------ */
+/* Replica el patron de la landing hermana: bloque de copy a la izquierda y
+   tarjetas de verificación a la derecha, todo dentro de un panel con vidrio
+   tenue que lo separa del resto de la pagina. */
+.compat-panel {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(2rem, 4vw, 3.5rem);
+	padding: clamp(1.75rem, 4vw, 3rem);
+	border: 1px solid rgba(79, 214, 232, 0.22);
+	border-radius: var(--radius-lg, 20px);
+	background:
+		radial-gradient(120% 140% at 0% 0%, rgba(79, 214, 232, 0.10), transparent 58%),
+		rgba(255, 255, 255, 0.025);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+@media (min-width: 900px) {
+	.compat-panel { grid-template-columns: 1.15fr 1fr; align-items: center; }
+}
+
+.compat-kicker {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	margin: 0 0 1rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--accent, #4fd6e8);
+}
+
+.compat-kicker-dot {
+	display: grid;
+	place-items: center;
+	width: 1.35rem;
+	height: 1.35rem;
+	border-radius: 50%;
+	background: var(--accent, #4fd6e8);
+	color: #06121a;
+}
+
+.compat-kicker-dot svg { width: 0.7rem; height: 0.7rem; }
+
+.compat-h { margin: 0 0 0.9rem; }
+
+.compat-lede {
+	margin: 0 0 1.6rem;
+	max-width: 42ch;
+	color: var(--text-dim);
+	font-size: 1rem;
+	line-height: 1.55;
+}
+
+.compat-cta { margin-top: 0.25rem; }
+
+.compat-side {
+	display: grid;
+	gap: 0.75rem;
+	align-content: center;
+}
+
+/* tarjeta: check a la izquierda, titulo y detalle a la derecha */
+.compat-card {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.85rem;
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--hairline);
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.035);
+	transition: border-color 0.28s var(--ease), background-color 0.28s var(--ease);
+}
+
+.compat-card:hover {
+	border-color: rgba(79, 214, 232, 0.34);
+	background: rgba(79, 214, 232, 0.06);
+}
+
+.compat-check {
+	display: grid;
+	place-items: center;
+	width: 1.5rem;
+	height: 1.5rem;
+	flex: 0 0 auto;
+	border-radius: 50%;
+	background: rgba(79, 214, 232, 0.16);
+	color: var(--accent, #4fd6e8);
+	margin-top: 0.1rem;
+}
+
+.compat-check svg { width: 0.85rem; height: 0.85rem; }
+
+.compat-card-t {
+	margin: 0;
+	font-weight: 600;
+	font-size: 0.9375rem;
+	color: var(--text, #fff);
+	line-height: 1.3;
+}
+
+.compat-card-d {
+	margin: 0.2rem 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.45;
+	color: var(--text-dim);
+}
+
+/* lista de modelos, debajo del panel */
+.compat-models {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(1.5rem, 3vw, 2.5rem);
+	margin-top: 2.5rem;
+}
+
+@media (min-width: 760px) {
+	.compat-models { grid-template-columns: 1fr 1fr; }
+}
+
+/* el badge del hero ahora es un enlace a esta seccion: sin subrayado */
+a.ios-badge {
+	text-decoration: none;
+	cursor: pointer;
+	transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+
+a.ios-badge:hover { transform: translateY(-1px); }
+a.ios-badge:active { transform: translateY(0) scale(0.99); }
+a.ios-badge:focus-visible {
+	outline: 2px solid var(--accent, #4fd6e8);
+	outline-offset: 3px;
 }
 
 .compat-note {
