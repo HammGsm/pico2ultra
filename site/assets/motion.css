@@ -219,3 +219,67 @@ summary:focus-visible {
     transform: none;
   }
 }
+
+/* --- Cinema: crossfade en el compositor, sin JS ------------------------- */
+/* animation-timeline: view() ata la animacion al scroll y la corre el hilo
+   del compositor: no hay rAF ni escritura de estilos por frame, asi que no
+   compite con el hilo principal y se siente mas inmediata que el loop JS.
+   El JS solo actua como respaldo si el navegador no la soporta. */
+@supports (animation-timeline: view()) {
+  .cinema { view-timeline-name: --cinema; view-timeline-axis: block; }
+
+  .cinema-frame {
+    animation-name: cinema-cross;
+    animation-duration: 1ms;          /* requerido: la duracion la pone el scroll */
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --cinema;
+    animation-range: contain 0% contain 100%;
+    transition: none;                  /* el compositor ya interpola */
+    will-change: auto;
+  }
+
+  /* frame 0: visible al entrar, se apaga al cruzar la mitad */
+  .cinema-frame[data-frame="0"] {
+    animation-name: cinema-out;
+  }
+
+  .cinema-caption {
+    animation-name: cinema-cap;
+    animation-duration: 1ms;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --cinema;
+    animation-range: contain 0% contain 100%;
+    transition: none;
+  }
+
+  .cinema-caption[data-frame="0"] { animation-name: cinema-cap-out; }
+}
+
+@keyframes cinema-out {
+  0%   { opacity: 1; }
+  45%  { opacity: 1; }
+  65%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes cinema-cross {
+  0%   { opacity: 0; }
+  45%  { opacity: 0; }
+  65%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes cinema-cap-out {
+  0%   { opacity: 1; transform: translateY(0); }
+  70%  { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes cinema-cap {
+  0%   { opacity: 0; transform: translateY(10px); }
+  45%  { opacity: 0; transform: translateY(10px); }
+  85%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(0); }
+}

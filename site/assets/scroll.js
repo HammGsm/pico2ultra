@@ -64,7 +64,10 @@
   var stage = document.querySelector('.cinema-stage');
   var frames = document.querySelectorAll('.cinema-frame');
   var captions = document.querySelectorAll('.cinema-caption');
-  if (cinema && frames.length && !reduceMotion) {
+  /* Si el navegador soporta animation-timeline: view(), el crossfade lo corre
+     el compositor desde CSS y este loop sobra: se salta por completo. */
+  var nativeCinema = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+  if (cinema && frames.length && !reduceMotion && !nativeCinema) {
     gatedLoop(cinema, function () {
       var rect = cinema.getBoundingClientRect();
       var stageH = stage ? stage.offsetHeight : window.innerHeight;
