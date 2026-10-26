@@ -73,15 +73,23 @@
 
       var p = clamp(-rect.top / total, 0, 1); /* 0..1 a lo largo del pin */
 
-      /* crossfade triangular: cada frame i tiene una ventana centrada
-         en c = i/(n-1) y ancho w = 1/(n-1). opacity = 1 - |p-c|/w. */
+      /* crossfade con curva suave en vez de triangular lineal: la triangular
+         hace que el frame se quede casi invisible hasta la mitad del tramo
+         y aparece de golpe. smoothstep reparte el cambio en todo el recorrido. */
       var n = frames.length;
       for (var i = 0; i < n; i++) {
         var c = n === 1 ? 0 : i / (n - 1);
         var w = n === 1 ? 1 : 1 / (n - 1);
-        var o = clamp(1 - Math.abs(p - c) / w, 0, 1);
+        var t = clamp(1 - Math.abs(p - c) / w, 0, 1);
+        var o = t * t * (3 - 2 * t); /* smoothstep */
         frames[i].style.opacity = o;
-        if (captions[i]) captions[i].style.opacity = o;
+        /* parallax minimo: el frame entrante se asienta, no salta.
+           1.04 -> 1 = se percibe movimiento sin marear. */
+        frames[i].style.transform = "scale(" + (1.04 - 0.04 * o).toFixed(4) + ")";
+        if (captions[i]) {
+          captions[i].style.opacity = o;
+          captions[i].style.transform = "translateY(" + ((1 - o) * 14).toFixed(1) + "px)";
+        }
       }
     });
   }
@@ -131,4 +139,19 @@
     }
     requestAnimationFrame(step);
   }
+})();
+
+/* ---------- 6. Aviso legal: al abrir, traer el contenido a la vista ---------- */
+/* El <details> esta en el footer: al desplegarlo el texto nace por debajo del
+   borde inferior y parece que "no funciona". Al abrir, se ancla la cabecera
+   arriba y se hace scroll para que las primeras lineas queden a la vista. */
+(function () {
+  var legal = document.querySelector('details.legal');
+  if (!legal) return;
+  legal.addEventListener('toggle', function () {
+    if (!legal.open) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var top = legal.getBoundingClientRect().top + window.scrollY - 16;
+    window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+  });
 })();

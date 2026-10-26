@@ -718,56 +718,105 @@ section {
 }
 
 /* --- badge iOS: "Soporta iOS 26 -> iOS 27" ------------------------------ */
+/* Se lee como una insignia de producto, no como texto de relleno:
+   chip azul con el logo dentro, el "antes" apagado y tachado, y el
+   "ahora" en una pastilla solida azul que es lo primero que fija la vista. */
 .ios-badge {
 	display: inline-flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 0.5rem;
-	margin-top: 0.9rem;
-	padding: 0.4rem 0.8rem 0.4rem 0.45rem;
-	border: 1px solid rgba(79, 214, 232, 0.28);
+	gap: 0.55rem;
+	margin-top: 1rem;
+	padding: 0.3rem 0.35rem 0.3rem 0.3rem;
+	border: 1px solid rgba(74, 158, 255, 0.32);
 	border-radius: var(--pill);
-	background: linear-gradient(90deg, rgba(79, 214, 232, 0.10), rgba(16, 185, 129, 0.07));
-	font-size: 0.78125rem;
-	line-height: 1.2;
+	background:
+		radial-gradient(120% 180% at 0% 50%, rgba(74, 158, 255, 0.20), transparent 62%),
+		rgba(255, 255, 255, 0.04);
+	box-shadow:
+		0 1px 0 rgba(255, 255, 255, 0.06) inset,
+		0 8px 26px -14px rgba(74, 158, 255, 0.55);
+	font-size: 0.8125rem;
+	line-height: 1.15;
 }
 
-/* logo Apple en azul: el "iOS 27" es lo que se quiere leer primero */
-.ios-badge::before {
-	content: "";
-	width: 0.95rem;
-	height: 0.95rem;
+/* chip del logo: el azul Apple sobre su propio halo */
+.ios-badge-logo {
+	display: grid;
+	place-items: center;
+	width: 1.75rem;
+	height: 1.75rem;
 	flex: 0 0 auto;
-	background-color: #4a9eff;
-	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.365 1.43c0 1.14-.42 2.2-1.26 3.03-.9.9-1.98 1.42-3.1 1.33-.09-1.1.4-2.2 1.2-3.02.87-.9 2.1-1.44 3.16-1.34zM20.6 17.1c-.35.8-.77 1.55-1.27 2.24-.75 1.05-1.36 1.78-1.84 2.18-.73.66-1.5 1-2.33 1.03-.6 0-1.32-.17-2.16-.52-.84-.35-1.6-.52-2.3-.52-.73 0-1.51.17-2.35.52-.84.35-1.53.53-2.07.55-.79.03-1.58-.32-2.36-1.05-.52-.44-1.16-1.2-1.92-2.28-.82-1.15-1.49-2.47-2.02-3.99C1.2 13.7.93 12.2.93 10.75c0-1.66.36-3.1 1.08-4.3.57-.97 1.32-1.73 2.26-2.3.94-.56 1.96-.85 3.06-.88.65 0 1.5.2 2.55.6 1.05.4 1.73.6 2.03.6.23 0 .98-.24 2.26-.71 1.2-.44 2.22-.62 3.05-.55 2.24.18 3.92 1.06 5.04 2.65-2.01 1.22-3 2.92-2.98 5.1.02 1.7.63 3.11 1.83 4.24.54.52 1.15.92 1.82 1.2-.15.43-.3.84-.47 1.24z'/%3E%3C/svg%3E") center / contain no-repeat;
-	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.365 1.43c0 1.14-.42 2.2-1.26 3.03-.9.9-1.98 1.42-3.1 1.33-.09-1.1.4-2.2 1.2-3.02.87-.9 2.1-1.44 3.16-1.34zM20.6 17.1c-.35.8-.77 1.55-1.27 2.24-.75 1.05-1.36 1.78-1.84 2.18-.73.66-1.5 1-2.33 1.03-.6 0-1.32-.17-2.16-.52-.84-.35-1.6-.52-2.3-.52-.73 0-1.51.17-2.35.52-.84.35-1.53.53-2.07.55-.79.03-1.58-.32-2.36-1.05-.52-.44-1.16-1.2-1.92-2.28-.82-1.15-1.49-2.47-2.02-3.99C1.2 13.7.93 12.2.93 10.75c0-1.66.36-3.1 1.08-4.3.57-.97 1.32-1.73 2.26-2.3.94-.56 1.96-.85 3.06-.88.65 0 1.5.2 2.55.6 1.05.4 1.73.6 2.03.6.23 0 .98-.24 2.26-.71 1.2-.44 2.22-.62 3.05-.55 2.24.18 3.92 1.06 5.04 2.65-2.01 1.22-3 2.92-2.98 5.1.02 1.7.63 3.11 1.83 4.24.54.52 1.15.92 1.82 1.2-.15.43-.3.84-.47 1.24z'/%3E%3C/svg%3E") center / contain no-repeat;
+	border-radius: 50%;
+	background: linear-gradient(160deg, #5aa9ff, #2f7fe0);
+	box-shadow: 0 2px 10px -2px rgba(74, 158, 255, 0.7);
+}
+
+.ios-badge-logo svg {
+	width: 1rem;
+	height: 1rem;
+	fill: #fff;
 }
 
 .ios-badge-old {
-	color: var(--text-dim);
+	padding-left: 0.15rem;
+	color: rgba(255, 255, 255, 0.62);
+	font-weight: 500;
 	text-decoration: line-through;
-	text-decoration-color: rgba(255, 255, 255, 0.28);
+	text-decoration-color: rgba(255, 255, 255, 0.45);
+	text-decoration-thickness: 1.5px;
 }
 
 .ios-badge-arrow {
 	color: #4a9eff;
 	flex: 0 0 auto;
-	transform: translateX(-2px);
+	transform: translateX(-3px);
 	transition: transform 0.35s var(--ease);
 }
 
 .ios-badge:hover .ios-badge-arrow {
-	transform: translateX(2px);
+	transform: translateX(1px);
 }
 
+/* el "ahora": pastilla solida, el ancla visual del badge */
 .ios-badge-new {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.35rem 0.7rem 0.35rem 0.35rem;
+	border-radius: var(--pill);
+	background: linear-gradient(160deg, #5aa9ff, #2f7fe0);
+	color: #fff;
 	font-weight: 700;
-	color: #4a9eff;
+	letter-spacing: 0.005em;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
 }
 
-@media (max-width: 400px) {
+/* etiqueta de estado: da el peso de "sello" sin alargar la frase */
+.ios-badge-tag {
+	padding: 0.15rem 0.4rem;
+	border-radius: calc(var(--pill) / 2);
+	background: rgba(0, 0, 0, 0.28);
+	color: #fff;
+	font-size: 0.625rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+@media (max-width: 420px) {
 	.ios-badge {
-		font-size: 0.73rem;
+		font-size: 0.75rem;
+		gap: 0.45rem;
+	}
+
+	.ios-badge-logo {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+
+	.ios-badge-new {
+		padding: 0.3rem 0.6rem;
 	}
 }
 

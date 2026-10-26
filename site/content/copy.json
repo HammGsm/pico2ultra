@@ -12,8 +12,9 @@
   "cta": "Más información por WhatsApp",
   "cta_note": "Precio y stock al instante",
   "ios_badge": {
-   "from": "Soporta iOS 26",
-   "to": "Actualizado a iOS 27 soportado"
+   "from": "iOS 26",
+   "to": "iOS 27 soportado",
+   "tag": "ACTUALIZADO"
   }
  },
  "cinema": {

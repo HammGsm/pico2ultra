@@ -96,7 +96,10 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  will-change: opacity;
+  will-change: opacity, transform;
+  /* el JS escribe opacity/transform en cada frame de scroll: una transicion
+     corta suaviza el salto entre rAF y evita el aspecto "a tirones". */
+  transition: opacity 0.18s linear, transform 0.18s linear;
 }
 
 .cinema-frame picture,
@@ -115,7 +118,8 @@
 
 .cinema-caption {
   opacity: 0;
-  will-change: opacity;
+  will-change: opacity, transform;
+  transition: opacity 0.18s linear, transform 0.18s linear;
 }
 
 /* estado inicial antes de que scroll.js tome el control */
