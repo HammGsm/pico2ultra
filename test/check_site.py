@@ -159,6 +159,14 @@ def test_content(html, text, bundle):
           ">iPhone<" in html and ">iPad<" in html)
     check("[content] logo Apple es el path oficial (814x1000)",
           'viewBox="0 0 814 1000"' in html)
+    # novedades: tarjetas que llevan a WhatsApp
+    check("[content] seccion novedades con id", 'id="novedades"' in html)
+    check("[content] novedades tiene 2 tarjetas",
+          html.count('class="novedad-card"') == 2)
+    check("[content] tarjetas de novedades abren WhatsApp",
+          html.count('class="novedad-card" href="https://wa.me/') == 2)
+    check("[content] novedades usa los dos banners",
+          "novedad-wide.webp" in html and "novedad-tall.webp" in html)
     # cross-promo: bloque con los colores de imeiclick.com y CTA a /free
     # (el href imeiclick.com/free va antes del texto del CTA en la misma linea)
     check("[content] cross-promo imeiclick",

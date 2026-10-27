@@ -657,6 +657,157 @@ section {
 	white-space: nowrap;
 }
 
+/* --- Novedades: tarjetas con brillo que respira --------------------------- */
+.novedades-head { max-width: 46ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+.novedades-kicker {
+	margin: 0 0 0.8rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--accent, #4fd6e8);
+}
+
+.novedades-lede {
+	margin: 0;
+	max-width: 44ch;
+	color: var(--text-dim);
+	line-height: 1.55;
+}
+
+.novedades-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.25rem;
+}
+
+@media (min-width: 820px) {
+	.novedades-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* tarjeta entera es el enlace: area de click grande, sin JS */
+.novedad-card {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border: 1px solid rgba(79, 214, 232, 0.2);
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.028);
+	text-decoration: none;
+	color: inherit;
+	transition: border-color 0.34s var(--ease), transform 0.34s var(--ease);
+}
+
+.novedad-card:hover {
+	border-color: rgba(79, 214, 232, 0.5);
+	transform: translateY(-3px);
+}
+
+.novedad-card:focus-visible {
+	outline: 2px solid var(--accent, #4fd6e8);
+	outline-offset: 3px;
+}
+
+/* el banner va como fondo: el arte ya trae su composicion y no necesita
+   recorte con alpha (no es una foto de producto) */
+.novedad-media {
+	position: relative;
+	display: block;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #0b1018;
+}
+
+/* contain: el arte del banner trae texto hasta el borde, cover lo cortaria */
+
+.novedad-media {
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	transition: transform 0.6s var(--ease);
+}
+
+.novedad-card:hover .novedad-media { transform: scale(1.03); }
+
+/* halo que late sobre la imagen: llama la atencion sin tapar el producto */
+.novedad-glow {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(120% 90% at 50% 100%, rgba(79, 214, 232, 0.28), transparent 62%);
+	opacity: 0.55;
+	animation: novedad-pulse 4.2s ease-in-out infinite;
+	pointer-events: none;
+}
+
+@keyframes novedad-pulse {
+	0%, 100% { opacity: 0.4; }
+	50%      { opacity: 0.78; }
+}
+
+/* reflejo que barre la tarjeta, escalonado entre las dos */
+.novedad-card::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.16) 48%, transparent 58%);
+	background-size: 260% 100%;
+	animation: novedad-sheen 6.4s ease-in-out infinite;
+	pointer-events: none;
+}
+
+.novedad-card:nth-child(2)::after { animation-delay: 1.7s; }
+
+@keyframes novedad-sheen {
+	0%, 58% { background-position: 190% 0; }
+	100%    { background-position: -70% 0; }
+}
+
+.novedad-body {
+	display: block;
+	padding: 1.15rem 1.25rem 1.3rem;
+}
+
+.novedad-t {
+	display: block;
+	font-size: 1.0625rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+.novedad-d {
+	display: block;
+	margin-top: 0.3rem;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: var(--text-dim);
+}
+
+.novedad-more {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	margin-top: 0.85rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	color: var(--accent, #4fd6e8);
+}
+
+.novedad-more svg { transition: transform 0.28s var(--ease); }
+.novedad-card:hover .novedad-more svg { transform: translateX(3px); }
+
+.novedades-cta { margin-top: 2rem; }
+
+@media (prefers-reduced-motion: reduce) {
+	.novedad-glow, .novedad-card::after { animation: none; }
+	.novedad-card:hover { transform: none; }
+	.novedad-card:hover .novedad-media { transform: none; }
+}
+
 /* --- Compatibilidad iOS 27: panel de dos columnas ------------------------ */
 /* Replica el patron de la landing hermana: bloque de copy a la izquierda y
    tarjetas de verificación a la derecha, todo dentro de un panel con vidrio

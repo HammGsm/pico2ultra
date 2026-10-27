@@ -109,6 +109,13 @@ compat_cards = "\n".join(
 \t\t\t\t\t</div>"""
     for i, k in enumerate(C["compat"]["cards"]))
 
+novedad_cards = "\n".join(
+    f"""					<a class="novedad-card" href="{e(C['novedades']['cta']['href'])}" target="_blank" rel="noopener" data-reveal data-reveal-delay="{i*90}">
+						<span class="novedad-media" role="img" aria-label="{e(k['alt'])}" style="background-image:url(assets/img/{k['img']}.webp)"><span class="novedad-glow" aria-hidden="true"></span></span>
+						<span class="novedad-body"><span class="novedad-t">{e(k['t'])}</span><span class="novedad-d">{e(k['d'])}</span><span class="novedad-more">Ver por WhatsApp<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+					</a>"""
+    for i, k in enumerate(C["novedades"]["cards"]))
+
 DOC = f"""<!doctype html>
 <html lang="es">
 <head>
@@ -279,6 +286,21 @@ DOC = f"""<!doctype html>
 					</div>
 				</div>
 				<p class="compat-note">{e(C['compat']['note'])}</p>
+			</div>
+		</section>
+
+		<!-- 6b. Novedades: iOS 27, clic a WhatsApp -->
+		<section class="novedades pad-y hairline-top" id="novedades" aria-labelledby="novedades-h">
+			<div class="wrap">
+				<header class="novedades-head">
+					<p class="novedades-kicker">{e(C['novedades']['eyebrow'])}</p>
+					<h2 class="h2" id="novedades-h" data-reveal>{e(C['novedades']['title'])}</h2>
+					<p class="novedades-lede" data-reveal data-reveal-delay="60">{e(C['novedades']['lede'])}</p>
+				</header>
+				<div class="novedades-grid">
+{novedad_cards}
+				</div>
+				<a class="cta novedades-cta" href="{e(C['novedades']['cta']['href'])}" target="_blank" rel="noopener" data-reveal data-reveal-delay="180">{e(C['novedades']['cta']['t'])}</a>
 			</div>
 		</section>
 

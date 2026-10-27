@@ -128,5 +128,28 @@
    }
   ],
   "warning": "IMPORTANTE: El acceso o la manipulación de dispositivos sin la debida autorización de su titular legítimo constituye una infracción legal. Asegúrese de contar con la documentación probatoria de dominio previo a realizar cualquier intervención técnica."
+ },
+ "novedades": {
+  "eyebrow": "Novedad",
+  "title": "iOS 27 ya entra",
+  "lede": "El bypass que ya conoce el camino. Un click en STAR, el DFU solo, y el equipo queda listo.",
+  "cta": {
+   "t": "Consultar por WhatsApp",
+   "href": "https://wa.me/5491166658740?text=Hola%2C%20quiero%20confirmar%20si%20mi%20equipo%20es%20compatible%20con%20la%20PICO%202%20Ultra"
+  },
+  "cards": [
+   {
+    "t": "Bypass iOS 27",
+    "d": "El primer pase del dia, sin pasos manuales.",
+    "img": "novedad-wide",
+    "alt": "PICO 2 Ultra y el bypass de iOS 27 en un simple click"
+   },
+   {
+    "t": "Un solo click",
+    "d": "STAR, DFU y espera. Nada mas.",
+    "img": "novedad-tall",
+    "alt": "Placa PICO 2 Ultra de IMEI CLICK con botones STAR y RESET"
+   }
+  ]
  }
 }
