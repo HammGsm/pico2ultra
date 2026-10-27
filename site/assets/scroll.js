@@ -109,7 +109,32 @@
         rio.unobserve(el);
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    function show(el) {
+      var delay = parseInt(el.dataset.revealDelay, 10) || 0;
+      if (delay) el.style.transitionDelay = delay + 'ms';
+      el.classList.add('is-revealed');
+      rio.unobserve(el);
+    }
+
     reveals.forEach(function (r) { rio.observe(r); });
+
+    /* Red de seguridad: si el elemento ya esta en pantalla (salto por ancla,
+       recarga a mitad de pagina, viewport alto), el observer puede no emitir
+       y el bloque se queda invisible a opacity 0 -> parece que "se rompio".
+       Se revela por geometria, sin esperar al observer. */
+    function sweep() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = 0; i < reveals.length; i++) {
+        var r = reveals[i].getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) show(reveals[i]);
+      }
+    }
+    sweep();
+    window.addEventListener('load', sweep);
+    window.addEventListener('hashchange', function () {
+      setTimeout(sweep, 60);
+      setTimeout(sweep, 400);
+    });
   }
 
   /* ---------- 4. Count-up ---------- */
